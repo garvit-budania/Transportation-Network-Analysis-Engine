@@ -12,6 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(
     tnae
     src/app/main.cpp
+    src/core/Graph.cpp
+    src/io/CSVReader.cpp
+    src/algorithms/BFS.cpp
 )
 
 target_include_directories(
