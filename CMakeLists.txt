@@ -15,6 +15,7 @@ add_executable(
     src/core/Graph.cpp
     src/io/CSVReader.cpp
     src/algorithms/BFS.cpp
+    src/algorithms/DFS.cpp
 )
 
 target_include_directories(

@@ -4,19 +4,36 @@
 #include "core/Graph.hpp"
 #include "io/CSVReader.hpp"
 #include "algorithms/BFS.hpp"
+#include "algorithms/DFS.hpp"
 
 int main() {
     Graph graph;
     CSVReader reader;
 
-    reader.loadNodes("data/nodes.csv", graph);
-    reader.loadEdges("data/routes.csv", graph);
+    if (!reader.loadNodes("data/nodes.csv", graph)) {
+        std::cout << "Failed to load nodes\n";
+        return 1;
+    }
 
-    std::vector<int> traversal = BFS::traverse(graph, 1);
+    if (!reader.loadEdges("data/routes.csv", graph)) {
+        std::cout << "Failed to load routes\n";
+        return 1;
+    }
+
+    std::vector<int> bfsTraversal = BFS::traverse(graph, 1);
 
     std::cout << "BFS Traversal: ";
 
-    for (int node : traversal)
+    for (int node : bfsTraversal)
+        std::cout << node << " ";
+
+    std::cout << '\n';
+
+    std::vector<int> dfsTraversal = DFS::run(graph, 1);
+
+    std::cout << "DFS Traversal: ";
+
+    for (int node : dfsTraversal)
         std::cout << node << " ";
 
     std::cout << '\n';
