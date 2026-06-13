@@ -1,0 +1,5 @@
+build/
+.git/
+.vscode/
+network.png
+network.dot
