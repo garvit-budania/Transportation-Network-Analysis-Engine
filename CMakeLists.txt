@@ -20,6 +20,7 @@ add_executable(
     src/algorithms/AStar.cpp
     src/algorithms/UnionFind.cpp
     src/algorithms/Kruskal.cpp
+    src/algorithms/MaxFlow.cpp
 )
 
 target_include_directories(

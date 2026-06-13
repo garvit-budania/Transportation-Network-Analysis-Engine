@@ -7,6 +7,7 @@
 #include "algorithms/Dijkstra.hpp"
 #include "algorithms/AStar.hpp"
 #include "algorithms/Kruskal.hpp"
+#include "algorithms/MaxFlow.hpp"
 
 int main() {
     Graph graph(false);
@@ -32,7 +33,8 @@ int main() {
 
     std::cout << "\n\n";
 
-    auto shortestRoute = Dijkstra::shortestPath(graph, 1, 5);
+    auto shortestRoute =
+        Dijkstra::shortestPath(graph, 1, 5);
 
     std::cout << "Dijkstra Route:\n";
 
@@ -47,7 +49,8 @@ int main() {
               << shortestRoute.totalDistance
               << " km\n\n";
 
-    auto heuristicRoute = AStar::shortestPath(graph, 1, 5);
+    auto heuristicRoute =
+        AStar::shortestPath(graph, 1, 5);
 
     std::cout << "A* Route:\n";
 
@@ -78,7 +81,14 @@ int main() {
 
     std::cout << "\nMST Cost: "
               << mst.totalCost
-              << " km\n";
+              << " km\n\n";
+
+    int maxFlow =
+        MaxFlow::edmondsKarp(graph, 1, 5);
+
+    std::cout << "Maximum Flow (Delhi -> Pune): "
+              << maxFlow
+              << "\n";
 
     return 0;
 }
