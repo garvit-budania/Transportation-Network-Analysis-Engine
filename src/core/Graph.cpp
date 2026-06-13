@@ -1,8 +1,9 @@
 #include "core/Graph.hpp"
+
 #include <stdexcept>
 
-Graph::Graph(bool directed) {
-    this->directed = directed;
+Graph::Graph(bool isDirected) {
+    directed = isDirected;
     totalEdges = 0;
 }
 
@@ -45,6 +46,10 @@ const Node& Graph::getNode(int nodeId) const {
         throw std::runtime_error("Node not found");
 
     return it->second;
+}
+
+std::string Graph::getNodeName(int nodeId) const {
+    return getNode(nodeId).name;
 }
 
 const std::vector<Edge>& Graph::getNeighbors(int nodeId) const {

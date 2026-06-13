@@ -26,32 +26,34 @@ int main() {
     std::cout << "BFS Traversal: ";
 
     for (int node : bfsTraversal)
-        std::cout << node << " ";
+        std::cout << graph.getNodeName(node) << " ";
 
-    std::cout << '\n';
+    std::cout << "\n";
 
     std::vector<int> dfsTraversal = DFS::run(graph, 1);
 
     std::cout << "DFS Traversal: ";
 
     for (int node : dfsTraversal)
-        std::cout << node << " ";
+        std::cout << graph.getNodeName(node) << " ";
 
-    std::cout << '\n';
+    std::cout << "\n\n";
 
-    PathResult result =
-        Dijkstra::shortestPath(graph, 1, 5);
+    PathResult result = Dijkstra::shortestPath(graph, 1, 5);
 
-    std::cout << "\nShortest Path (1 -> 5): ";
+    std::cout << "Shortest Path:\n";
 
-    for (int node : result.path)
-        std::cout << node << " ";
+    for (size_t i = 0; i < result.path.size(); i++) {
+        std::cout << graph.getNodeName(result.path[i]);
 
-    std::cout << '\n';
+        if (i != result.path.size() - 1)
+            std::cout << " -> ";
+    }
 
+    std::cout << "\n";
     std::cout << "Total Distance: "
               << result.totalDistance
-              << '\n';
+              << " km\n";
 
     return 0;
 }

@@ -1,7 +1,9 @@
 #pragma once
 
+#include <string>
 #include <unordered_map>
 #include <vector>
+
 #include "Node.hpp"
 #include "Edge.hpp"
 
@@ -19,11 +21,15 @@ public:
     bool addEdge(const Edge& edge);
 
     bool hasNode(int nodeId) const;
+
     const Node& getNode(int nodeId) const;
+    std::string getNodeName(int nodeId) const;
+
     const std::vector<Edge>& getNeighbors(int nodeId) const;
     const std::unordered_map<int, Node>& getAllNodes() const;
 
     size_t nodeCount() const;
     size_t edgeCount() const;
+
     bool isDirected() const;
 };
