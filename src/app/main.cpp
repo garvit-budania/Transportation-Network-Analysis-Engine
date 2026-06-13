@@ -12,6 +12,8 @@
 #include "algorithms/NetworkAnalyzer.hpp"
 #include "algorithms/NetworkResilience.hpp"
 
+#include "visualization/DotExporter.hpp"
+
 void printRoute(
     const Graph& graph,
     const PathResult& result
@@ -35,6 +37,11 @@ int main() {
         std::cout << "Failed to load network data\n";
         return 1;
     }
+
+    DotExporter::exportGraph(
+        graph,
+        "network.dot"
+    );
 
     std::cout << "Network Statistics\n";
     std::cout << "------------------\n";

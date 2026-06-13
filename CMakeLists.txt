@@ -23,6 +23,7 @@ add_executable(
     src/algorithms/MaxFlow.cpp
     src/algorithms/NetworkAnalyzer.cpp
     src/algorithms/NetworkResilience.cpp
+    src/visualization/DotExporter.cpp
 )
 
 target_include_directories(

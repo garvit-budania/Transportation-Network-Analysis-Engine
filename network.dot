@@ -1,0 +1,37 @@
+graph TransportationNetwork {
+    15 [label="Nagpur"];
+    14 [label="Chennai"];
+    13 [label="Bengaluru"];
+    12 [label="Hyderabad"];
+    11 [label="Kolkata"];
+    10 [label="Patna"];
+    9 [label="Kanpur"];
+    8 [label="Lucknow"];
+    7 [label="Bhopal"];
+    6 [label="Indore"];
+    5 [label="Pune"];
+    4 [label="Mumbai"];
+    3 [label="Ahmedabad"];
+    2 [label="Jaipur"];
+    1 [label="Delhi"];
+    13 -- 14 [label="350"];
+    12 -- 13 [label="570"];
+    12 -- 15 [label="500"];
+    10 -- 11 [label="580"];
+    10 -- 15 [label="700"];
+    9 -- 10 [label="520"];
+    8 -- 9 [label="90"];
+    7 -- 15 [label="350"];
+    7 -- 8 [label="500"];
+    6 -- 7 [label="200"];
+    6 -- 15 [label="450"];
+    5 -- 12 [label="560"];
+    4 -- 5 [label="150"];
+    4 -- 12 [label="710"];
+    3 -- 4 [label="530"];
+    3 -- 6 [label="390"];
+    2 -- 3 [label="650"];
+    2 -- 6 [label="400"];
+    1 -- 2 [label="280"];
+    1 -- 8 [label="550"];
+}
