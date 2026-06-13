@@ -10,6 +10,7 @@
 #include "algorithms/Kruskal.hpp"
 #include "algorithms/MaxFlow.hpp"
 #include "algorithms/NetworkAnalyzer.hpp"
+#include "algorithms/NetworkResilience.hpp"
 
 int main() {
     Graph graph(false);
@@ -49,7 +50,44 @@ int main() {
 
     std::cout << "Most Connected City: "
               << graph.getNodeName(hubCity)
-              << "\n\n";
+              << "\n";
+
+    std::cout << "\nCritical Cities\n";
+    std::cout << "---------------\n";
+
+    auto criticalCities =
+        NetworkResilience::articulationPoints(graph);
+
+    if (criticalCities.empty()) {
+        std::cout << "None\n";
+    }
+    else {
+        for (int city : criticalCities)
+            std::cout
+                << graph.getNodeName(city)
+                << "\n";
+    }
+
+    std::cout << "\nCritical Routes\n";
+    std::cout << "---------------\n";
+
+    auto criticalRoutes =
+        NetworkResilience::bridges(graph);
+
+    if (criticalRoutes.empty()) {
+        std::cout << "None\n";
+    }
+    else {
+        for (const auto& route : criticalRoutes) {
+            std::cout
+                << graph.getNodeName(route.first)
+                << " - "
+                << graph.getNodeName(route.second)
+                << "\n";
+        }
+    }
+
+    std::cout << "\n";
 
     std::cout << "BFS: ";
 

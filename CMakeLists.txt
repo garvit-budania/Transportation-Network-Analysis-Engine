@@ -22,6 +22,7 @@ add_executable(
     src/algorithms/Kruskal.cpp
     src/algorithms/MaxFlow.cpp
     src/algorithms/NetworkAnalyzer.cpp
+    src/algorithms/NetworkResilience.cpp
 )
 
 target_include_directories(
