@@ -1,10 +1,17 @@
 #pragma once
 
 #include <vector>
+
 #include "core/Graph.hpp"
 
+enum class RouteMetric {
+    Distance,
+    Time,
+    Cost
+};
+
 struct PathResult {
-    double totalDistance;
+    double totalWeight;
     std::vector<int> path;
 };
 
@@ -13,6 +20,7 @@ public:
     static PathResult shortestPath(
         const Graph& graph,
         int source,
-        int destination
+        int destination,
+        RouteMetric metric = RouteMetric::Distance
     );
 };

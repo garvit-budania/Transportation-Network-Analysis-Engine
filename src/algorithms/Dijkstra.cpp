@@ -8,10 +8,11 @@
 PathResult Dijkstra::shortestPath(
     const Graph& graph,
     int source,
-    int destination
+    int destination,
+    RouteMetric metric
 ) {
     PathResult result;
-    result.totalDistance = std::numeric_limits<double>::infinity();
+    result.totalWeight = std::numeric_limits<double>::infinity();
 
     if (!graph.hasNode(source) || !graph.hasNode(destination))
         return result;
@@ -40,7 +41,15 @@ PathResult Dijkstra::shortestPath(
             continue;
 
         for (const auto& edge : graph.getNeighbors(currentNode)) {
-            double newDistance = dist[currentNode] + edge.distance;
+            double weight = edge.distance;
+
+            if (metric == RouteMetric::Time)
+                weight = edge.travelTime;
+            else if (metric == RouteMetric::Cost)
+                weight = edge.cost;
+
+            double newDistance =
+                dist[currentNode] + weight;
 
             if (newDistance < dist[edge.destination]) {
                 dist[edge.destination] = newDistance;
@@ -58,7 +67,7 @@ PathResult Dijkstra::shortestPath(
         std::numeric_limits<double>::infinity())
         return result;
 
-    result.totalDistance = dist[destination];
+    result.totalWeight = dist[destination];
 
     int currentNode = destination;
 

@@ -22,7 +22,7 @@ PathResult AStar::shortestPath(
     int destination
 ) {
     PathResult result;
-    result.totalDistance = std::numeric_limits<double>::infinity();
+    result.totalWeight = std::numeric_limits<double>::infinity();
 
     if (!graph.hasNode(source) || !graph.hasNode(destination))
         return result;
@@ -86,7 +86,7 @@ PathResult AStar::shortestPath(
         std::numeric_limits<double>::infinity())
         return result;
 
-    result.totalDistance = gScore[destination];
+    result.totalWeight = gScore[destination];
 
     int currentNode = destination;
 

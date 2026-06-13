@@ -12,6 +12,20 @@
 #include "algorithms/NetworkAnalyzer.hpp"
 #include "algorithms/NetworkResilience.hpp"
 
+void printRoute(
+    const Graph& graph,
+    const PathResult& result
+) {
+    for (size_t i = 0; i < result.path.size(); i++) {
+        std::cout << graph.getNodeName(result.path[i]);
+
+        if (i + 1 < result.path.size())
+            std::cout << " -> ";
+    }
+
+    std::cout << "\n";
+}
+
 int main() {
     Graph graph(false);
     CSVReader reader;
@@ -104,35 +118,62 @@ int main() {
     std::cout << "\n\n";
 
     auto shortestRoute =
-        Dijkstra::shortestPath(graph, 1, 5);
+        Dijkstra::shortestPath(
+            graph,
+            1,
+            5,
+            RouteMetric::Distance
+        );
 
-    std::cout << "Dijkstra Route:\n";
+    std::cout << "Shortest Route (Distance)\n";
 
-    for (size_t i = 0; i < shortestRoute.path.size(); i++) {
-        std::cout << graph.getNodeName(shortestRoute.path[i]);
+    printRoute(graph, shortestRoute);
 
-        if (i + 1 < shortestRoute.path.size())
-            std::cout << " -> ";
-    }
-
-    std::cout << "\nDistance: "
-              << shortestRoute.totalDistance
+    std::cout << "Distance: "
+              << shortestRoute.totalWeight
               << " km\n\n";
+
+    auto fastestRoute =
+        Dijkstra::shortestPath(
+            graph,
+            1,
+            5,
+            RouteMetric::Time
+        );
+
+    std::cout << "Fastest Route (Time)\n";
+
+    printRoute(graph, fastestRoute);
+
+    std::cout << "Travel Time: "
+              << fastestRoute.totalWeight
+              << " hrs\n\n";
+
+    auto cheapestRoute =
+        Dijkstra::shortestPath(
+            graph,
+            1,
+            5,
+            RouteMetric::Cost
+        );
+
+    std::cout << "Cheapest Route (Cost)\n";
+
+    printRoute(graph, cheapestRoute);
+
+    std::cout << "Cost: "
+              << cheapestRoute.totalWeight
+              << "\n\n";
 
     auto heuristicRoute =
         AStar::shortestPath(graph, 1, 5);
 
-    std::cout << "A* Route:\n";
+    std::cout << "A* Route\n";
 
-    for (size_t i = 0; i < heuristicRoute.path.size(); i++) {
-        std::cout << graph.getNodeName(heuristicRoute.path[i]);
+    printRoute(graph, heuristicRoute);
 
-        if (i + 1 < heuristicRoute.path.size())
-            std::cout << " -> ";
-    }
-
-    std::cout << "\nDistance: "
-              << heuristicRoute.totalDistance
+    std::cout << "Distance: "
+              << heuristicRoute.totalWeight
               << " km\n\n";
 
     auto mst = Kruskal::findMST(graph);
