@@ -21,6 +21,7 @@ add_executable(
     src/algorithms/UnionFind.cpp
     src/algorithms/Kruskal.cpp
     src/algorithms/MaxFlow.cpp
+    src/algorithms/NetworkAnalyzer.cpp
 )
 
 target_include_directories(

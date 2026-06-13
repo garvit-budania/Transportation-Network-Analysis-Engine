@@ -2,12 +2,14 @@
 
 #include "core/Graph.hpp"
 #include "io/CSVReader.hpp"
+
 #include "algorithms/BFS.hpp"
 #include "algorithms/DFS.hpp"
 #include "algorithms/Dijkstra.hpp"
 #include "algorithms/AStar.hpp"
 #include "algorithms/Kruskal.hpp"
 #include "algorithms/MaxFlow.hpp"
+#include "algorithms/NetworkAnalyzer.hpp"
 
 int main() {
     Graph graph(false);
@@ -18,6 +20,36 @@ int main() {
         std::cout << "Failed to load network data\n";
         return 1;
     }
+
+    std::cout << "Network Statistics\n";
+    std::cout << "------------------\n";
+
+    std::cout << "Nodes: "
+              << graph.nodeCount()
+              << "\n";
+
+    std::cout << "Edges: "
+              << graph.edgeCount()
+              << "\n";
+
+    std::cout << "Connected Components: "
+              << NetworkAnalyzer::connectedComponents(graph)
+              << "\n";
+
+    std::cout << "Average Degree: "
+              << NetworkAnalyzer::averageDegree(graph)
+              << "\n";
+
+    std::cout << "Density: "
+              << NetworkAnalyzer::networkDensity(graph)
+              << "\n";
+
+    int hubCity =
+        NetworkAnalyzer::mostConnectedNode(graph);
+
+    std::cout << "Most Connected City: "
+              << graph.getNodeName(hubCity)
+              << "\n\n";
 
     std::cout << "BFS: ";
 
