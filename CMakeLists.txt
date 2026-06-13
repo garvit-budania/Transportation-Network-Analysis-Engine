@@ -17,6 +17,7 @@ add_executable(
     src/algorithms/BFS.cpp
     src/algorithms/DFS.cpp
     src/algorithms/Dijkstra.cpp
+    src/algorithms/AStar.cpp
 )
 
 target_include_directories(

@@ -1,6 +1,6 @@
-id,name
-1,Delhi
-2,Jaipur
-3,Mumbai
-4,Ahmedabad
-5,Pune
+id,name,x,y
+1,Delhi,0,0
+2,Jaipur,3,2
+3,Mumbai,7,-4
+4,Ahmedabad,5,0
+5,Pune,8,-3

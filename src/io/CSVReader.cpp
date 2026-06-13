@@ -18,13 +18,19 @@ bool CSVReader::loadNodes(const std::string& filename, Graph& graph) {
 
         std::string id;
         std::string name;
+        std::string x;
+        std::string y;
 
         std::getline(ss, id, ',');
         std::getline(ss, name, ',');
+        std::getline(ss, x, ',');
+        std::getline(ss, y, ',');
 
         graph.addNode({
             std::stoi(id),
-            name
+            name,
+            std::stod(x),
+            std::stod(y)
         });
     }
 

@@ -2,8 +2,10 @@
 
 #include <string>
 
-struct Node
-{
+struct Node {
     int id;
     std::string name;
+
+    double x;
+    double y;
 };
