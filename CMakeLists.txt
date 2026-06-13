@@ -16,6 +16,7 @@ add_executable(
     src/io/CSVReader.cpp
     src/algorithms/BFS.cpp
     src/algorithms/DFS.cpp
+    src/algorithms/Dijkstra.cpp
 )
 
 target_include_directories(

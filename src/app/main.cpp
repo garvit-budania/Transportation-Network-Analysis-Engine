@@ -5,6 +5,7 @@
 #include "io/CSVReader.hpp"
 #include "algorithms/BFS.hpp"
 #include "algorithms/DFS.hpp"
+#include "algorithms/Dijkstra.hpp"
 
 int main() {
     Graph graph;
@@ -37,6 +38,20 @@ int main() {
         std::cout << node << " ";
 
     std::cout << '\n';
+
+    PathResult result =
+        Dijkstra::shortestPath(graph, 1, 5);
+
+    std::cout << "\nShortest Path (1 -> 5): ";
+
+    for (int node : result.path)
+        std::cout << node << " ";
+
+    std::cout << '\n';
+
+    std::cout << "Total Distance: "
+              << result.totalDistance
+              << '\n';
 
     return 0;
 }
