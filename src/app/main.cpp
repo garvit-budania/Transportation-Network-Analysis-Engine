@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 #include "core/Graph.hpp"
 #include "io/CSVReader.hpp"
@@ -7,71 +6,78 @@
 #include "algorithms/DFS.hpp"
 #include "algorithms/Dijkstra.hpp"
 #include "algorithms/AStar.hpp"
+#include "algorithms/Kruskal.hpp"
 
 int main() {
-    Graph graph;
+    Graph graph(false);
     CSVReader reader;
 
-    if (!reader.loadNodes("data/nodes.csv", graph)) {
-        std::cout << "Failed to load nodes\n";
+    if (!reader.loadNodes("data/nodes.csv", graph) ||
+        !reader.loadEdges("data/routes.csv", graph)) {
+        std::cout << "Failed to load network data\n";
         return 1;
     }
 
-    if (!reader.loadEdges("data/routes.csv", graph)) {
-        std::cout << "Failed to load routes\n";
-        return 1;
-    }
+    std::cout << "BFS: ";
 
-    std::vector<int> bfsTraversal = BFS::traverse(graph, 1);
-
-    std::cout << "BFS Traversal: ";
-
-    for (int node : bfsTraversal)
+    for (int node : BFS::traverse(graph, 1))
         std::cout << graph.getNodeName(node) << " ";
 
     std::cout << "\n";
 
-    std::vector<int> dfsTraversal = DFS::run(graph, 1);
+    std::cout << "DFS: ";
 
-    std::cout << "DFS Traversal: ";
-
-    for (int node : dfsTraversal)
+    for (int node : DFS::run(graph, 1))
         std::cout << graph.getNodeName(node) << " ";
 
     std::cout << "\n\n";
 
-    PathResult dijkstraResult =
-        Dijkstra::shortestPath(graph, 1, 5);
+    auto shortestRoute = Dijkstra::shortestPath(graph, 1, 5);
 
     std::cout << "Dijkstra Route:\n";
 
-    for (size_t i = 0; i < dijkstraResult.path.size(); i++) {
-        std::cout << graph.getNodeName(dijkstraResult.path[i]);
+    for (size_t i = 0; i < shortestRoute.path.size(); i++) {
+        std::cout << graph.getNodeName(shortestRoute.path[i]);
 
-        if (i != dijkstraResult.path.size() - 1)
+        if (i + 1 < shortestRoute.path.size())
             std::cout << " -> ";
     }
 
-    std::cout << "\n";
-    std::cout << "Total Distance: "
-              << dijkstraResult.totalDistance
+    std::cout << "\nDistance: "
+              << shortestRoute.totalDistance
               << " km\n\n";
 
-    PathResult aStarResult =
-        AStar::shortestPath(graph, 1, 5);
+    auto heuristicRoute = AStar::shortestPath(graph, 1, 5);
 
     std::cout << "A* Route:\n";
 
-    for (size_t i = 0; i < aStarResult.path.size(); i++) {
-        std::cout << graph.getNodeName(aStarResult.path[i]);
+    for (size_t i = 0; i < heuristicRoute.path.size(); i++) {
+        std::cout << graph.getNodeName(heuristicRoute.path[i]);
 
-        if (i != aStarResult.path.size() - 1)
+        if (i + 1 < heuristicRoute.path.size())
             std::cout << " -> ";
     }
 
-    std::cout << "\n";
-    std::cout << "Total Distance: "
-              << aStarResult.totalDistance
+    std::cout << "\nDistance: "
+              << heuristicRoute.totalDistance
+              << " km\n\n";
+
+    auto mst = Kruskal::findMST(graph);
+
+    std::cout << "MST Routes:\n";
+
+    for (const auto& edge : mst.edges) {
+        std::cout
+            << graph.getNodeName(edge.source)
+            << " - "
+            << graph.getNodeName(edge.destination)
+            << " ("
+            << edge.distance
+            << " km)\n";
+    }
+
+    std::cout << "\nMST Cost: "
+              << mst.totalCost
               << " km\n";
 
     return 0;

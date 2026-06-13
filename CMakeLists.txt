@@ -18,6 +18,8 @@ add_executable(
     src/algorithms/DFS.cpp
     src/algorithms/Dijkstra.cpp
     src/algorithms/AStar.cpp
+    src/algorithms/UnionFind.cpp
+    src/algorithms/Kruskal.cpp
 )
 
 target_include_directories(

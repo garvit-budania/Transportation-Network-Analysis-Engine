@@ -2,8 +2,8 @@
 
 #include <stdexcept>
 
-Graph::Graph(bool isDirected) {
-    directed = isDirected;
+Graph::Graph(bool directed) {
+    this->directed = directed;
     totalEdges = 0;
 }
 
@@ -32,6 +32,7 @@ bool Graph::addEdge(const Edge& edge) {
     }
 
     totalEdges++;
+
     return true;
 }
 
